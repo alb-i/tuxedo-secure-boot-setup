@@ -1,0 +1,15 @@
+menuentry 'Debian GNU/Linux, with Linux VERSION' --unrestricted {
+    echo "Verifying signatures..."
+    if verify_detached /VMLINUZ /VMLINUZ.sig ; then
+        echo   'Loading Linux VERSION ...'
+        linux  /VMLINUZ root=/dev/mapper/system-root ro  quiet splash acpi=force reboot=acpi atkbd.reset=1 i8042.nomux=1 i8042.reset=1 i8042.nopnp=1 i8042.dumbkbd=1 i8042.noloop
+        if verify_detached /INITRD /INITRD.sig ;  then
+            echo   'Loading initial ramdisk ...'
+            initrd /INITRD
+        else
+          echo "/INITRD did not verify!"
+        fi
+    else
+      echo "/VMLINUZ did not verify!"
+    fi
+}

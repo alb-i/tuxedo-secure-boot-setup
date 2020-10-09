@@ -1,0 +1,6 @@
+#! /bin/sh
+set -e
+
+/root/secure_boot/update-all.sh
+
+exit 0

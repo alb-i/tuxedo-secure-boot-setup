@@ -1,0 +1,10 @@
+
+load_font unicode
+set gfxmode=640x480
+load_video
+insmod gfxterm
+set lang=en_US
+insmod gettext
+terminal_output gfxterm
+
+set timeout=1

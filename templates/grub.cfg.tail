@@ -1,0 +1,6 @@
+### BEGIN /etc/grub.d/30_uefi-firmware ###
+menuentry 'UEFI Firmware Settings' --unrestricted {
+	fwsetup
+}
+### END /etc/grub.d/30_uefi-firmware ###
+
