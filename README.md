@@ -1,3 +1,5 @@
+(Update: see last paragraph.)
+
 # Setup Secure Boot on Tuxedo-OS (Ubuntu) 20.04 with InsydeH2O bios on a tuxedo-computer linux laptop
 
 This guide is based on [another guide](https://ruderich.org/simon/notes/secure-boot-with-grub-and-signed-linux-and-initrd) and [this guide about how to sign for secure boot](https://ubuntu.com/blog/how-to-sign-things-for-secure-boot), but adapted for my machine.
@@ -211,3 +213,11 @@ In order for this code to work, you have to delete the PK-key from within the fi
 * Make sure that your firmware is set to enforce secure boot, especially if you manually disabled this during debugging of your setup!
 
 
+# Update: it seems to work fine
+
+I now can confirm that the update script does its jobs, namely signing the modules after a kernel update as well as removing unused kernels/initrd-images from the efi drive once they got wiped from /boot.
+I also discovered that ubuntu adds its own unsigned bootloader on some update occasions back to the firmware and makes it the default option. Clearly, this won't boot as it is not signed by the machine key. It will give an error message and then boot the signed grub afterwards - which is a waste of startup time. I solved this by adding
+```bash
+efibootmgr -o 0002
+```
+to the `update-all.sh` script. The number after `-o` may vary for you, when you run `efibootmgr` you see your options.
