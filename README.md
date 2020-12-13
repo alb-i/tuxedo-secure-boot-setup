@@ -44,7 +44,7 @@ openssl req -new -x509 -newkey rsa:2048 -subj "/CN=KEK/" -keyout KEK.key -out KE
 openssl req -new -x509 -newkey rsa:2048 -subj "/CN=db/"  -keyout db.key  -out db.crt  -days 7300 -nodes -sha256
 ```
 
-* The key that will be used by the `shim`-loader:
+* Edit the `openssl.cnf.template` file and save it as `openssl.cnf`. The key that will be used by the `shim`-loader:
 ```bash
 openssl req -config ./openssl.cnf \
         -new -x509 -newkey rsa:2048 \
